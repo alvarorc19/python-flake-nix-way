@@ -13,6 +13,12 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {inherit system;};
     pythonPackages = pkgs.python3Packages;
+
+    repo = builtins.fetchGit {
+      url = "https://github.com/alvarorc19/python-flake.git";
+      rev = "main";
+    };
+    requirementsTxt = "${repo}/requirements.txt";
   in {
     devShells."${system}".default =
       pkgs.mkShell rec
@@ -33,6 +39,7 @@
         # Run this command, only after creating the virtual environment
         postVenvCreation = ''
           unset SOURCE_DATE_EPOCH
+          cp -f ${requirementsTxt} requirements.txt
           pip install -r requirements.txt
         '';
 
