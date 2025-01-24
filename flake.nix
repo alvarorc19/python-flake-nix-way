@@ -14,11 +14,12 @@
     pkgs = import nixpkgs {inherit system;};
     pythonPackages = pkgs.python3Packages;
 
-    repo = builtins.fetchGit {
-      url = "https://github.com/alvarorc19/python-flake.git";
-      rev = "main";
-    };
-    requirementsTxt = "${repo}/requirements.txt";
+    # repo = builtins.fetchGit {
+    #   url = "https://github.com/alvarorc19/python-flake.git";
+    #   rev = "main";
+    # };
+    # requirementsTxt = "${repo}/requirements.txt";
+    requirementsTxt = "https://raw.githubusercontent.com/alvarorc19/python-flake/refs/heads/main/requirements.txt";
   in {
     devShells."${system}".default =
       pkgs.mkShell rec
