@@ -22,6 +22,7 @@
     requirements_link = "https://raw.githubusercontent.com/alvarorc19/python-flake/refs/heads/main/requirements.txt";
     requirementsTxt = builtins.readFile (builtins.fetchurl {
       url = "${requirements_link}";
+      sha256 = "";
     });
   in {
     devShells."${system}".default =
