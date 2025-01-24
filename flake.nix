@@ -13,16 +13,12 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {inherit system;};
     pythonPackages = pkgs.python3Packages;
-    # repo = builtins.fetchGit {
-    #   url = "https://github.com/alvarorc19/python-flake.git";
-    #   rev = "main";
-    # };
-    # requirementsTxt = "${repo}/requirements.txt";
-    # requirements_link = "https://raw.githubusercontent.com/alvarorc19/python-flake/refs/heads/main/requirements.txt";
-    # requirementsTxt = builtins.readFile (builtins.fetchurl {
-    #   url = "${requirements_link}";
-    #   sha256 = "";
-    # });
+
+    # Fetch the raw requirements.txt from GitHub
+    requirementsTxt = pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/alvarorc19/python-flake/main/requirements.txt";
+      sha256 = "1dmxh8w6nvh3xvy8y3vwp7bl7g98xh66w38g9jlbr78fh9pwpkxv";
+    };
   in {
     devShells."${system}".default =
       pkgs.mkShell rec
@@ -36,13 +32,14 @@
 
         buildInputs = with pythonPackages; [
           venvShellHook
-
           numpy
         ];
 
         # Run this command, only after creating the virtual environment
         postVenvCreation = ''
           unset SOURCE_DATE_EPOCH
+          echo "Downloading requirements.txt..."
+          cp ${requirementsTxt} requirements.txt
           pip install -r requirements.txt
         '';
 
