@@ -33,6 +33,7 @@
         buildInputs = with pythonPackages; [
           venvShellHook
           numpy
+          jupyter
         ];
 
         # Run this command, only after creating the virtual environment
