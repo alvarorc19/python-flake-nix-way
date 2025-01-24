@@ -40,6 +40,7 @@
         # Run this command, only after creating the virtual environment
         postVenvCreation = ''
           unset SOURCE_DATE_EPOCH
+          echo ${requirementsTxt}
           cp -f ${requirementsTxt} requirements.txt
           pip install -r requirements.txt
         '';
