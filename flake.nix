@@ -33,7 +33,7 @@
         # Run this command, only after creating the virtual environment
         postVenvCreation = ''
           unset SOURCE_DATE_EPOCH
-          curl "https://raw.githubusercontent.com/alvarorc19/python-flake/refs/heads/main/requirements.txt" >> requirements.txt
+          curl "https://raw.githubusercontent.com/alvarorc19/python-flake/refs/heads/main/requirements.txt" > requirements.txt
           pip install -r requirements.txt
         '';
 
