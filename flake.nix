@@ -27,7 +27,7 @@
         venvDir = "./.venv";
         nativeBuildInputs = with pkgs; [
           python312
-          clang
+          gcc14Stdenv
         ];
 
         buildInputs = with pythonPackages; [
