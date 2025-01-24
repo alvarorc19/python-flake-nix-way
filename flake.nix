@@ -19,7 +19,10 @@
     #   rev = "main";
     # };
     # requirementsTxt = "${repo}/requirements.txt";
-    requirementsTxt = "https://raw.githubusercontent.com/alvarorc19/python-flake/refs/heads/main/requirements.txt";
+    requirements_link = "https://raw.githubusercontent.com/alvarorc19/python-flake/refs/heads/main/requirements.txt";
+    requirementsTxt = builtins.readFile (builtins.fetchurl {
+      url = "${requirements_link}";
+    });
   in {
     devShells."${system}".default =
       pkgs.mkShell rec
@@ -40,8 +43,7 @@
         # Run this command, only after creating the virtual environment
         postVenvCreation = ''
           unset SOURCE_DATE_EPOCH
-          echo ${requirementsTxt}
-          cp -f ${requirementsTxt} requirements.txt
+          echo ${requirementsTxt} >> requirements.txt
           pip install -r requirements.txt
         '';
 
