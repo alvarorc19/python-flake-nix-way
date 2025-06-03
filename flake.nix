@@ -1,5 +1,5 @@
 {
-  description = "Venv virtual environment with python the nix way";
+  description = "Python coding environment the nix way";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
