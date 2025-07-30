@@ -23,6 +23,7 @@
           python312
           gcc14Stdenv
           nodejs
+          pyright
         ];
 
         buildInputs = with pythonPackages; [
@@ -44,8 +45,8 @@
           nbformat
 
           # Machine Learning
-          scikit-learn-extra
-          tensorflow
+          # scikit-learn-extra
+          pytorch
         ];
 
         postShellHook = ''
